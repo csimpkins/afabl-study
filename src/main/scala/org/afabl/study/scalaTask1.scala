@@ -24,7 +24,9 @@ class ScalaBunny1 extends Agent[BunnyState1, BunnyAction.Value]
 object ScalaTask1 {
 
   def main(args: Array[String]) = {
-
-
+    val scalaBunny1 = new ScalaBunny1
+    val result = evaluate(scalaBunny1, new BunnyWorld1)
+    val score = result.totalScore / result.timeSteps
+    println(f"Your ScalaBunny1 scored $score%f (greater than 0.5 is good).")
   }
 }
