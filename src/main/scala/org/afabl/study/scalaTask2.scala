@@ -4,8 +4,8 @@ import org.afabl._
 import org.afabl.util._
 
 
-class ScalaBunny1 extends Agent[BunnyState, BunnyAction.Value]
-    with Task1Scorer {
+class ScalaBunny2 extends Agent[BunnyState, BunnyAction.Value]
+    with Task2Scorer {
 
   // Your code goes in the body of this method. This method defines
   // your agent's behavior, that is, what action it takes in a given
@@ -21,12 +21,12 @@ class ScalaBunny1 extends Agent[BunnyState, BunnyAction.Value]
 }
 
 
-object ScalaTask1 {
+object ScalaTask2 {
 
   def main(args: Array[String]) = {
-    val scalaBunny1 = new ScalaBunny1
-    val result = evaluate(scalaBunny1, new BunnyWorld)
+    val scalaBunny2 = new ScalaBunny2
+    val result = evaluate(scalaBunny2, new BunnyWorld)
     val score = result.totalScore / result.timeSteps
-    println(f"Your ScalaBunny1 scored $score%f (greater than 0.5 is good).")
+    println(f"Your ScalaBunny2 scored $score%f (greater than 0.5 is good).")
   }
 }
