@@ -7,11 +7,13 @@ import scala.collection._
 
 case class Location(x: Int, y: Int)
 
-case class BunnyState1(
+case class BunnyState(
   bunny: Location,
   wolf: Location,
-  food: Location
+  food: Location,
+  mate: Location
 )
+
 
 object BunnyAction extends Enumeration {
   val Up = Value("^")
@@ -20,8 +22,8 @@ object BunnyAction extends Enumeration {
   val Right = Value(">")
 }
 
-class BunnyWorld1(val width: Int = 5, val height: Int = 5)
-  extends World[BunnyState1, BunnyAction.Value] with LazyLogging {
+class BunnyWorld(val width: Int = 5, val height: Int = 5)
+  extends World[BunnyState, BunnyAction.Value] with LazyLogging {
 
   var everyOtherStep = false
   val random = new Random()
@@ -34,22 +36,26 @@ class BunnyWorld1(val width: Int = 5, val height: Int = 5)
       for (x <- Range(0, width); y <- Range(0, height)) yield Location(x, y)
     val foodLocs =
       for (x <- Range(0, width); y <- Range(0, height)) yield Location(x, y)
-    for (b <- bunnyLocs; w <- wolfLocs; f <- foodLocs) yield BunnyState1(b, w, f)
+    val mateLocs =
+      for (x <- Range(0, width); y <- Range(0, height)) yield Location(x, y)
+    for (b <- bunnyLocs; w <- wolfLocs; f <- foodLocs; m <- mateLocs) yield
+      BunnyState(b, w, f, m)
   }
 
   val actions = BunnyAction.values.toSeq
 
-  def init(): BunnyState1 = {
+  def init(): BunnyState = {
     val bunny = updateStart()
     val wolf = updateStart(List(bunny))
     val food = updateStart(List(bunny, wolf))
-    state = new BunnyState1(bunny, wolf, food)
+    val mate = updateStart(List(bunny, wolf, food))
+    state = new BunnyState(bunny, wolf, food, mate)
     state
   }
 
-  def resetAgent(): BunnyState1 = {
-    val bunny = updateStart(List(state.wolf, state.food))
-    state = BunnyState1(bunny, state.wolf, state.food)
+  def resetAgent(): BunnyState = {
+    val bunny = updateStart(List(state.wolf, state.food, state.mate))
+    state = BunnyState(bunny, state.wolf, state.food, state.mate)
     state
   }
 
@@ -65,18 +71,20 @@ class BunnyWorld1(val width: Int = 5, val height: Int = 5)
     }
   }
 
-  def act(intendedAction: BunnyAction.Value): BunnyState1 = {
+  def act(intendedAction: BunnyAction.Value): BunnyState = {
     logger.trace(s"Intended action: $intendedAction")
     val nextBunny = moveBunny(state, intendedAction)
-    val reportedNextState = BunnyState1(nextBunny, state.wolf, state.food)
+    val reportedNextState =
+      BunnyState(nextBunny, state.wolf, state.food, state.mate)
     val nextFood = moveFood(state)
     val nextWolf = moveWolf(state)
-    state = BunnyState1(nextBunny, nextWolf, nextFood)
+    val nextMate = moveMate(state)
+    state = BunnyState(nextBunny, nextWolf, nextFood, nextMate)
     logMeetings(reportedNextState)
     reportedNextState
   }
 
-  def moveBunny(state: BunnyState1,
+  def moveBunny(state: BunnyState,
     intendedAction: BunnyAction.Value): Location = {
     val action = if (random.nextDouble < .1) {
       BunnyAction(random.nextInt(BunnyAction.values.size))
@@ -98,7 +106,7 @@ class BunnyWorld1(val width: Int = 5, val height: Int = 5)
     bunny
   }
 
-  def moveWolf(state: BunnyState1) = {
+  def moveWolf(state: BunnyState) = {
     val bunny = state.bunny
     val currentWolf = state.wolf
     if (everyOtherStep) {
@@ -123,22 +131,28 @@ class BunnyWorld1(val width: Int = 5, val height: Int = 5)
     }
   }
 
-  def moveFood(state: BunnyState1) = {
+  def moveFood(state: BunnyState) = {
     if (state.bunny == state.food) {
-      updateStart(List(state.bunny, state.wolf))
+      updateStart(List(state.bunny, state.wolf, state.mate))
     } else {
       state.food
     }
   }
 
-  def logMeetings(state: BunnyState1) = {
+  def moveMate(state: BunnyState) = {
+    if (state.bunny == state.mate) {
+      updateStart(List(state.bunny, state.wolf, state.food))
+    } else {
+      state.mate
+    }
+  }
+
+  def logMeetings(state: BunnyState) = {
     if (state.bunny == state.food)
       logger.trace(s"Bunny met food.")
     else if (state.bunny == state.wolf)
       logger.trace("Wolf met bunny.")
+    else if (state.bunny == state.mate)
+      logger.trace("Bunny met mate.")
   }
-
-  // def randomChoice[T](xs: Seq[T]): T = {
-  //   xs(Random.nextInt(xs.size))
-  // }
 }
