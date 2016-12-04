@@ -8,6 +8,7 @@ You will write four simple agents: two agents in Scala and two in AFABL (A Frien
 
 ## Task 1: Bunny-Food-Wolf
 
+```
 +---+---+---+---+---+
 |   |   |   | W |   |
 +---+---+---+---+---+
@@ -19,6 +20,7 @@ You will write four simple agents: two agents in Scala and two in AFABL (A Frien
 +---+---+---+---+---+
 |   |   |   |   |   |
 +---+---+---+---+---+
+```
 
 In the grid world above, the bunny (B) must pursue two goals simultaneously: find food (F) and avoid the wolf (W).  The bunny may move up, down, left, or right.  When it finds food it consumes the food and new food appears elsewhere in the grid world, when it meets the wolf it is eaten and ``respawns'' elsewhere.
 
@@ -34,16 +36,19 @@ For Task 1 write an agent that controls the bunny. The bunny should meet the wol
 
 ## Task 2: Mating Bunny
 
+```
++---+---+---+---+---+
 |   |   |   | W |   |
-|---|---|---|---|---|
++---+---+---+---+---+
 | F |   |   |   |   |
-|---|---|---|---|---|
++---+---+---+---+---+
 |   |   |   | M |   |
-|---|---|---|---|---|
++---+---+---+---+---+
 |   | B |   |   |   |
-|---|---|---|---|---|
++---+---+---+---+---+
 |   |   |   |   |   |
-
++---+---+---+---+---+
+```
 
 For Task 2 write a bunny agent for a world that is identical to the world in Task 1 except that the bunny must also find mates.  This world includes one static potential mate (M) that behaves similarly to the food.  When the bunny finds the potential mate, the simulation assumes that the bunny has ``mated,'' the mate disappears, and another potential mate appears elsewhere.  The simulation runs as in Task 1, and the scorer additionally keeps track of how many mates the bunny finds.  As in Task 1, programmers were asked to write bunny agents that meet the wolf as little as possible, eat as much food as possible, and find as many mates as possible.
 
