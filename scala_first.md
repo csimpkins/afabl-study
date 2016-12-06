@@ -63,7 +63,7 @@ You will place your code in four files:
 - `src/main/scala/org/afabl/study/scalaTask1.scala`
 - `src/main/scala/org/afabl/study/scalaTask2.scala`
 
-You should complete `scalaTask1`, then `scalaTask2`, then `AfablTask1` and finally `AfablTask2`.
+### You should complete these tasks in a specific order: `scalaTask1`, then `scalaTask2`, then `AfablTask1` and finally `AfablTask2`.
 
 A build configuration has been provided for you named "Run." You simply have to click the green run arrow to test your work, which will bring up a menu like this:
 
