@@ -22,15 +22,15 @@ You will write four simple agents: two agents in Scala and two in AFABL (A Frien
 +---+---+---+---+---+
 ```
 
-In the grid world above, the bunny (B) must pursue two goals simultaneously: find food (F) and avoid the wolf (W).  The bunny may move up, down, left, or right.  When it finds food it consumes the food and new food appears elsewhere in the grid world, when it meets the wolf it is eaten and ``respawns'' elsewhere.
+In the grid world above, the bunny (B) must pursue two goals simultaneously: find food (F) and avoid the wolf (W).  The bunny may move up, down, left, or right.  When it finds food it consumes the food and new food appears elsewhere in the grid world, when it meets the wolf it is eaten and "respawns" elsewhere.
 
 The bunny world works as follows:
 
 - The bunny world is a discrete grid of cells.  The bunny, wolf, and food each occupy one cell.
 - During each time step the bunny may move north, south, east, or west -- this is the bunny agent's action set.
 - Every two time steps the wolf moves towards the bunny.
-- If the bunny moves to the cell currently occupied by the food, the agent should be written to recognize this fact and give the agent an appropriate reward signal. In any case the simulation assumes food is ``eaten'' and new food appears elsewhere.
-- If the wolf moves to the cell currently occupied by the bunny it eats the bunny and the bunny ``respawns'' in a new location.
+- If the bunny moves to the cell currently occupied by the food, the agent should be written to recognize this fact and give the agent an appropriate reward signal. In any case the simulation assumes food is "eaten" and new food appears elsewhere.
+- If the wolf moves to the cell currently occupied by the bunny it eats the bunny and the bunny "respawns" in a new location.
 
 For Task 1 write an agent that controls the bunny. The bunny should meet the wolf as little as possible and eat as much food as possible.
 
@@ -50,7 +50,7 @@ For Task 1 write an agent that controls the bunny. The bunny should meet the wol
 +---+---+---+---+---+
 ```
 
-For Task 2 write a bunny agent for a world that is identical to the world in Task 1 except that the bunny must also find mates.  This world includes one static potential mate (M) that behaves similarly to the food.  When the bunny finds the potential mate, the simulation assumes that the bunny has ``mated,'' the mate disappears, and another potential mate appears elsewhere.  The simulation runs as in Task 1, and the scorer additionally keeps track of how many mates the bunny finds.  As in Task 1, programmers were asked to write bunny agents that meet the wolf as little as possible, eat as much food as possible, and find as many mates as possible.
+For Task 2 write a bunny agent for a world that is identical to the world in Task 1 except that the bunny must also find mates.  This world includes one static potential mate (M) that behaves similarly to the food.  When the bunny finds the potential mate, the simulation assumes that the bunny has "mated," the mate disappears, and another potential mate appears elsewhere.  The simulation runs as in Task 1, and the scorer additionally keeps track of how many mates the bunny finds.  As in Task 1, programmers were asked to write bunny agents that meet the wolf as little as possible, eat as much food as possible, and find as many mates as possible.
 
 # Study Mechanics
 
@@ -65,7 +65,7 @@ You will place your code in four files:
 
 You should complete `scalaTask1`, then `scalaTask2`, then `AfablTask1` and finally `AfablTask2`.
 
-A build configuration has been provided for you named "Run". You simply have to click the green run arrow to test your work, which will bring up a menu like this:
+A build configuration has been provided for you named "Run." You simply have to click the green run arrow to test your work, which will bring up a menu like this:
 
 ```sh
 Multiple main classes detected, select one to run:
