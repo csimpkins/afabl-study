@@ -23,6 +23,6 @@ object AfablTask1 {
     println("done.")
     val result = evaluate(afablBunny1, bunnyWorld)
     val score = result.totalScore / result.timeSteps
-    println(f"Your AFABL Bunny1 scored $score%f (greater than 0.5 is good).")
+    println(f"Your AfablBunny1 scored $score%f (>0.4 is decent, >0.5 is good).")
   }
 }

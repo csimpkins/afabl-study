@@ -14,7 +14,6 @@ case class BunnyState(
   mate: Location
 )
 
-
 object BunnyAction extends Enumeration {
   val Up = Value("^")
   val Down = Value("v")
